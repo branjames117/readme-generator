@@ -144,10 +144,15 @@ const questions = [
   {
     type: 'input',
     name: 'contributing',
-    message: '(Optional) Describe how a user can contribute to the project:',
+    message:
+      '(Optional) Describe how a user can contribute to the project (enter CC to use the industry standard Contributor Covenant):',
     validate(contributing) {
       // screenshot filepath must have at least 5 characters
-      if (contributing && contributing.length < 5) {
+      if (
+        contributing &&
+        contributing.length < 5 &&
+        contributing.toLowerCase() !== 'cc'
+      ) {
         return 'Contributing information must be blank (if inapplicable) or at least 5 characters in length.';
       } else {
         return true;
