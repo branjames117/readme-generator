@@ -21,7 +21,7 @@ Run the program with the command `node index`. Answer all required prompts. The 
 
 ## Credits
 
-Built by Brandon James Hoskins for the Vanderbilt Full-stack Coding Boot Camp.
+Built by Brandon James Hoskins for the Vanderbilt Full-stack Coding Boot Camp. Markdown for many license badges taken from [lukas-h @ GitHub](https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba).
 
 ## License
 
