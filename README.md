@@ -4,10 +4,6 @@
 
 A command-line application that uses Node.js and inquirer to create professional-grade README.md files for projects based on user inputs. The generated readme is based on the [How to create a Professional README](./readme-guide.md) guide.
 
-## Project Requirements
-
-App must generate a README.md with the project title, and sections entitled Description, Table of Contents, Installation, Usage, License (chosen from a list of licenses, with the applicable badge being placed near the top of the file), Contributing, Tests, and Questions (which contains a link to the user's GitHub profile as well as the user's email address).
-
 ## Table of Contents
 
 - [Installation](#installation)
