@@ -2,7 +2,7 @@
 
 ## Description
 
-[mit](https://img.shields.io/badge/License-mit-blue)
+![mit](https://img.shields.io/badge/License-mit-blue)
 
 A music festival companion app with social media features.
 
