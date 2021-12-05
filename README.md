@@ -19,6 +19,8 @@ Download all source files with the CLI command `git clone`. Then, from within th
 
 Run the program with the command `node index`. Answer all required prompts. The generated README.md file will be located in the ./dist folder, which can then be placed in your project directory before being uploaded to GitHub.
 
+A video demonstration of the app can be viewed [here](https://watch.screencastify.com/v/g2GrBT8DiDnduRc6saan).
+
 ## Credits
 
 Built by Brandon James Hoskins for the Vanderbilt Full-stack Coding Boot Camp. Markdown for many license badges taken from [lukas-h @ GitHub](https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba).
