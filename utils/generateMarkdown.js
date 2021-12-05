@@ -24,14 +24,6 @@ ${tests}
 `;
 }
 
-function renderQuestionsSection(email) {
-  return `
-## Questions
-
-With any questions email the repository owner at [${email}](mailto:${email}).
-`;
-}
-
 function renderTableOfContentsSection(data) {
   let basicMarkdown = `* [Installation](#installation)
 * [Usage](#usage)
@@ -77,9 +69,9 @@ function generateMarkdown(data) {
   const tableOfContentsMarkdown = renderTableOfContentsSection(data);
 
   return `# ${title}
+${licenseMarkdown.badge}
 
 ## Description
-${licenseMarkdown.badge}
 
 ${description}
 
@@ -100,7 +92,16 @@ ${usage}
 ${licenseMarkdown.text}
 ${contributing ? renderContributingSection(contributing) : ''}${
     tests ? renderTestsSection(tests) : ''
-  }${email ? renderQuestionsSection(email) : ''}`;
+  }
+## Questions
+
+This repository was created and is maintained by [${username}](https://github.com/${username}).
+
+${
+  email
+    ? `With any questions email the repository owner at [${email}](mailto:${email}).`
+    : ''
+}`;
 }
 
 module.exports = generateMarkdown;
