@@ -1,6 +1,7 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const chalk = require('chalk');
+const generateMarkdown = require('./utils/generateMarkdown.js');
 
 const highlight = chalk.keyword('magenta');
 
@@ -89,51 +90,57 @@ const questions = [
       }
     },
   },
-  {
-    type: 'input',
-    name: 'screenshot',
-    message: `(Optional) Relative path to a ${highlight(
-      'screenshot'
-    )} of the app:`,
-    validate(screenshot) {
-      // screenshot filepath must have at least 5 characters
-      if (screenshot && screenshot.length > 5) {
-        return 'Relative filepath to screenshot must be blank (if inapplicable) or at least 5 characters in length.';
-      } else {
-        return true;
-      }
-    },
-  },
+  // {
+  //   type: 'input',
+  //   name: 'screenshot',
+  //   message: `(Optional) Relative path to a ${highlight(
+  //     'screenshot'
+  //   )} of the app:`,
+  //   validate(screenshot) {
+  //     // screenshot filepath must have at least 5 characters
+  //     if (screenshot && screenshot.length > 5) {
+  //       return 'Relative filepath to screenshot must be blank (if inapplicable) or at least 5 characters in length.';
+  //     } else {
+  //       return true;
+  //     }
+  //   },
+  // },
   {
     type: 'list',
     name: 'license',
     message: `Which ${highlight('license')} will your project use?`,
     choices: [
       'MIT',
-      'Apache 2.0',
+      'Mozilla Public License 2.0',
+      'Open Software License 3.0',
+      'PostgreSQL License',
+      'SIL Open Font License 1.1',
+      'University of Illinois/NCSA Open Source License',
+      'The Unlicense',
+      'zLib License',
+      'Academic Free License v3.0',
+      'Apache License 2.0',
+      'Artistic License 2.0',
+      'Boost Software License 1.0',
+      'BSD 2-claus "Simplified" License',
+      'BSD 3-claus Clear License',
+      'Creative Commons Zero v1.0 Universal',
+      'Creative Commons Attribution 4.0',
+      'Creative Commons Attribution Share Alike 4.0',
+      'Do What The F*ck You Want To Public License',
+      'Educational Community License v2.0',
+      'Eclipse Public License 1.0',
+      'Eclipse Public License 2.0',
+      'European Union Public License 1.1',
+      'GNU Affero General Public License v3.0',
+      'GNU General Public License v2.0',
+      'GNU General Public License v3.0',
+      'GNU Lesser General Public License v2.1',
+      'GNU Lesser General Public License v3.0',
       'ISC',
-      'BSD',
-      'GPLv2',
-      'GPLv3',
-      'AGPLv3',
-      'Enter my own',
+      'LaTeX Project Public License v1.3c',
+      'Microsoft Public License',
     ],
-  },
-  {
-    type: 'input',
-    name: 'license',
-    message:
-      '(Required) Describe your licensing situation, including the name of the license:',
-    validate(license) {
-      if (license.length < 5) {
-        return 'License information must be at least 5 character in length.';
-      } else {
-        return true;
-      }
-    },
-    when(answers) {
-      return answers.license === 'Enter my own';
-    },
   },
   {
     type: 'input',
@@ -169,29 +176,24 @@ const questions = [
       }
     },
   },
-  {
-    type: 'confirm',
-    name: 'confirmContributors',
-    message: `Did any other GitHub ${highlight(
-      'users'
-    )} contribute to this project?`,
-    default: false,
-  },
 ];
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {}
 
-// TODO: Create a function to initialize app
-function init() {
+// Immediately invoke app initialization
+(function init() {
   // Welcome the user
   console.log(`
-    Welcome to the ${highlight('Professional Readme Generator')}.
-    Answer the following questions and a README written in markdown language
-    will be generated which can be included in your coding project.
-`);
-  inquirer.prompt(questions).then((answers) => console.log(answers));
-}
+  Welcome to the ${highlight('Professional Readme Generator')}.
+  Answer the following questions and a README written in markdown language
+  will be generated which can be included in your coding project.
+  `);
 
-// Function call to initialize app
-init();
+  // Begin the series of questions
+  let markdown = '';
+  inquirer.prompt(questions).then((answers) => {
+    markdown = generateMarkdown(answers);
+    console.log(markdown);
+  });
+})();
