@@ -1,28 +1,34 @@
 const generateLicenseLink = require('./generateLicenseLink.js');
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
-function renderLicenseBadge(license) {
-  return `[](https://img.shields.io/badge/License-${license}-blue)`;
-}
 
 function renderContributingSection(contributing) {
-  return `## Contributing
+  if (contributing.toLowerCase() === 'cc') {
+    return `
+## Contributing
 
-  ${contributing}
+This repository and its contributors follow the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md).
+    `;
+  } else {
+    return `
+## Contributing
+
+${contributing}
 `;
+  }
 }
 
 function renderTestsSection(tests) {
-  return `## Tests
+  return `
+## Tests
 
-  ${tests}
+${tests}
 `;
 }
 
 function renderQuestionsSection(email) {
-  return `## Questions
-  
-  With any questions email the repository owner at [${email}](mailto:${email})
+  return `
+## Questions
+
+With any questions email the repository owner at [${email}](mailto:${email}).
 `;
 }
 
@@ -92,9 +98,9 @@ ${usage}
 ## License
 
 ${licenseMarkdown.text}
-${contributing ? renderContributingSection(contributing) : ''}
-${tests ? renderTestsSection(tests) : ''}
-${email ? renderQuestionsSection(email) : ''}`;
+${contributing ? renderContributingSection(contributing) : ''}${
+    tests ? renderTestsSection(tests) : ''
+  }${email ? renderQuestionsSection(email) : ''}`;
 }
 
 module.exports = generateMarkdown;

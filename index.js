@@ -1,11 +1,11 @@
-// TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const chalk = require('chalk');
+const fs = require('fs');
 const generateMarkdown = require('./utils/generateMarkdown.js');
 
 const highlight = chalk.keyword('magenta');
 
-// TODO: Create an array of questions for user input
+// Array of questions for user input
 const questions = [
   {
     type: 'input',
@@ -43,7 +43,7 @@ const questions = [
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(email)
           ? true
-          : 'Enter a valid email address, or leave blank if you do not wish to provide one.';
+          : 'Enter a valid email address, or leave blank if you do not wish to provide a Questions section.';
       } else {
         return true;
       }
@@ -178,8 +178,18 @@ const questions = [
   },
 ];
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+// Create the README.md file in the /dist dir
+function writeToFile(fileName, data) {
+  fs.writeFile(fileName, data, (err) => {
+    if (err) console.log(err);
+    else {
+      console.log(
+        `
+  README.md generated in the ./dist directory! ${highlight('Cheers!')}`
+      );
+    }
+  });
+}
 
 // Immediately invoke app initialization
 (function init() {
@@ -191,9 +201,7 @@ function writeToFile(fileName, data) {}
   `);
 
   // Begin the series of questions
-  let markdown = '';
   inquirer.prompt(questions).then((answers) => {
-    markdown = generateMarkdown(answers);
-    console.log(markdown);
+    writeToFile('./dist/README.md', generateMarkdown(answers));
   });
 })();
