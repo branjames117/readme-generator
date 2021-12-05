@@ -1,29 +1,6 @@
 const generateLicenseLink = require('./generateLicenseLink.js');
 
-function renderContributingSection(contributing) {
-  if (contributing.toLowerCase() === 'cc') {
-    return `
-## Contributing
-
-This repository and its contributors follow the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md).
-    `;
-  } else {
-    return `
-## Contributing
-
-${contributing}
-`;
-  }
-}
-
-function renderTestsSection(tests) {
-  return `
-## Tests
-
-${tests}
-`;
-}
-
+// Generate a Table of Contents section based on which data user submitted
 function renderTableOfContentsSection(data) {
   let basicMarkdown = `* [Installation](#installation)
 * [Usage](#usage)
@@ -47,11 +24,35 @@ function renderTableOfContentsSection(data) {
   return basicMarkdown;
 }
 
-// TODO: Create a function to generate markdown for README
-function generateMarkdown(data) {
-  console.log(data);
+// Generate a Contributing section only if the user submitted any contributing data
+function renderContributingSection(contributing) {
+  if (contributing.toLowerCase() === 'cc') {
+    return `
+## Contributing
 
-  // destructure the data object
+This repository and its contributors follow the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md).
+    `;
+  } else {
+    return `
+## Contributing
+
+${contributing}
+`;
+  }
+}
+
+// Generate the Tests section only of the user submitted any Tests
+function renderTestsSection(tests) {
+  return `
+## Tests
+
+${tests}
+`;
+}
+
+// Generate the markdown (all content to be printed in README.md)
+function generateMarkdown(data) {
+  // Destructure the data object
   const {
     title,
     username,
@@ -64,9 +65,8 @@ function generateMarkdown(data) {
     contributing,
   } = data;
 
-  // get license text, link, and badge URL
+  // Get license text and badge markdown
   const licenseMarkdown = generateLicenseLink(license, username);
-  const tableOfContentsMarkdown = renderTableOfContentsSection(data);
 
   return `# ${title}
 ${licenseMarkdown.badge}
@@ -77,7 +77,7 @@ ${description}
 
 ## Table of Contents
 
-${tableOfContentsMarkdown}
+${renderTableOfContentsSection(data)}
 
 ## Installation
 
